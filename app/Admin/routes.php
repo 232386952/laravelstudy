@@ -16,7 +16,7 @@ Route::group([
     $router->resource('mycars', MycarController::class);
     $router->resource('vouchers', VouchersController::class);
     $router->resource('userdata', UserdataController::class);
-    $router->resource('news', UserdataController::class);
+    $router->resource('news', NewsController::class);
     $router->resource('advertising', AdvertisingController::class);
     $router->resource('order', OrderController::class);
     $router->resource('commodity', CommodityController::class);
@@ -37,5 +37,10 @@ Route::group([
     $router->resource('carimage', CarimageController::class);
     $router->resource('financial', FinancialController::class);
     $router->resource('knowledge', KnowledgeController::class);
+    $router->resource('collection', CollectionController::class);
+    $router->resource('message', MessageController::class);
+    $router->resource('ordercontent', OrdercontentController::class);
+    $router->resource('integral', IntegralController::class);
+
 
 });

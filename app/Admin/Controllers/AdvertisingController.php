@@ -24,8 +24,8 @@ class AdvertisingController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('广告管理');
+            $content->description('广告管理页面');
 
             $content->body($this->grid());
         });
@@ -41,9 +41,8 @@ class AdvertisingController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
-
+            $content->header('广告编辑');
+            $content->description('广告编辑页面');
             $content->body($this->form()->edit($id));
         });
     }
@@ -57,9 +56,8 @@ class AdvertisingController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
-
+            $content->header('广告添加');
+            $content->description('广告添加页面');
             $content->body($this->form());
         });
     }
@@ -74,9 +72,15 @@ class AdvertisingController extends Controller
         return Admin::grid(Advertising::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->column('uid', '用户ID');
+            $grid->column('position', '位置分类');
+            $grid->column('title', '广告标题');
+            $grid->column('img', '主图');
+            $grid->column('content', '内容');
+            $grid->column('url', '链接');
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,6 +94,13 @@ class AdvertisingController extends Controller
         return Admin::form(Advertising::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('uid', '用户ID');
+            $form->text('position', '位置分类');
+            $form->text('title', '广告标题');
+            $form->text('img', '主图');
+            $form->text('content', '内容');
+            $form->text('url', '链接');
+
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

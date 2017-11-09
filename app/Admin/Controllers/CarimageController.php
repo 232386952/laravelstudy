@@ -24,8 +24,8 @@ class CarimageController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('车型图库');
+            $content->description('车型图库页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class CarimageController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('车型图库编辑');
+            $content->description('车型图库编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class CarimageController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('车型图片添加');
+            $content->description('车型图片添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,12 @@ class CarimageController extends Controller
         return Admin::grid(Carimage::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->column('name', '车型');
+            $grid->column('exteriorimg', '外观图片');
+            $grid->column('interiorimg', '内饰图片');
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,6 +93,9 @@ class CarimageController extends Controller
         return Admin::form(Carimage::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('name', '车型');
+            $form->text('exteriorimg', '外观图片');
+            $form->text('interiorimg', '内饰图片');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

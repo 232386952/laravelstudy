@@ -24,8 +24,8 @@ class FinancialController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('金融产品管理');
+            $content->description('金融产品管理页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class FinancialController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('金融产品编辑');
+            $content->description('金融产品编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class FinancialController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('金融产品添加');
+            $content->description('金融产品添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,12 @@ class FinancialController extends Controller
         return Admin::grid(Financial::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->column('uid', '用户ID');
+            $grid->column('details', '金融产品详情');
+            $grid->column('program', '购车方案');
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,6 +93,9 @@ class FinancialController extends Controller
         return Admin::form(Financial::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('uid', '用户ID');
+            $form->text('details', '金融产品详情');
+            $form->text('program', '购车方案');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

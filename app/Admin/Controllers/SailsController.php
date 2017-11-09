@@ -24,8 +24,8 @@ class SailsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('经销商管理');
+            $content->description('经销商管理页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class SailsController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('经销商编辑');
+            $content->description('经销商编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class SailsController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('经销商添加');
+            $content->description('经销商添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,15 @@ class SailsController extends Controller
         return Admin::grid(Sails::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->column('uid', '用户ID');
+            $grid->column('name', '经销商名字');
+            $grid->column('add', '经销商所在地');
+            $grid->column('img', '经销商展示图');
+            $grid->column('addtext', '详细地址');
+            $grid->column('coordinate', '地图坐标经纬度');
+            $grid->column('phone', '电话');
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,7 +96,13 @@ class SailsController extends Controller
         return Admin::form(Sails::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
+            $form->text('uid', '用户ID');
+            $form->text('name', '经销商名字');
+            $form->text('add', '经销商所在地');
+            $form->text('img', '经销商展示图');
+            $form->text('addtext', '详细地址');
+            $form->text('coordinate', '地图坐标经纬度');
+            $form->text('phone', '电话');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

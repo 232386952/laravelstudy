@@ -24,8 +24,8 @@ class PlayController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('玩车地带管理');
+            $content->description('玩车地带管理页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class PlayController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('玩车地带编辑');
+            $content->description('玩车地带编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class PlayController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('玩车地带添加');
+            $content->description('玩车地带添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,16 @@ class PlayController extends Controller
         return Admin::grid(Play::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->column('uid', '用户ID');
+            $grid->column('img', '缩略图');
+            $grid->column('title', '标题');
+            $grid->column('viows', '阅读数');
+            $grid->column('likes', '点赞数');
+            $grid->column('comments', '评论数');
+            $grid->column('time', '发布时间');
+            $grid->column('content', '文章内容');
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,7 +97,14 @@ class PlayController extends Controller
         return Admin::form(Play::class, function (Form $form) {
 
             $form->display('id', 'ID');
-
+            $form->text('uid', '用户ID');
+            $form->text('img', '缩略图');
+            $form->text('title', '标题');
+            $form->text('viows', '阅读数');
+            $form->text('likes', '点赞数');
+            $form->text('comments', '评论数');
+            $form->text('time', '发布时间');
+            $form->text('content', '文章内容');
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

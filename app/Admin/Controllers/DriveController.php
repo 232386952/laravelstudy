@@ -24,8 +24,8 @@ class DriveController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('预约试驾');
+            $content->description('预约试驾页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class DriveController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('预约试驾编辑');
+            $content->description('预约试驾编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class DriveController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('预约试驾添加');
+            $content->description('预约试驾添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,14 @@ class DriveController extends Controller
         return Admin::grid(Drive::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->column('uid', '用户ID');
+            $grid->column('name', '姓名');
+            $grid->column('phone', '电话');
+            $grid->column('time', '预约时间');
+            $grid->column('buytime', '计划购车时间');
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,6 +95,11 @@ class DriveController extends Controller
         return Admin::form(Drive::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('uid', '用户ID');
+            $form->text('name', '姓名');
+            $form->text('phone', '电话');
+            $form->text('time', '预约时间');
+            $form->text('buytime', '计划购车时间');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

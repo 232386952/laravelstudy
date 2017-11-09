@@ -24,8 +24,8 @@ class OpinionController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('意见反馈管理');
+            $content->description('意见反馈管理页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class OpinionController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('意见反馈编辑');
+            $content->description('意见反馈编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class OpinionController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('意见反馈添加');
+            $content->description('意见反馈添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,10 @@ class OpinionController extends Controller
         return Admin::grid(Opinion::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->column('uid', '用户ID');
+            $grid->column('content', '反馈内容');
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,6 +91,8 @@ class OpinionController extends Controller
         return Admin::form(Opinion::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('uid', '用户ID');
+            $form->text('content', '反馈内容');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');

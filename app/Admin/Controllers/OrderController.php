@@ -24,8 +24,8 @@ class OrderController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('订单管理');
+            $content->description('订单管理页面');
 
             $content->body($this->grid());
         });
@@ -41,8 +41,8 @@ class OrderController extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('订单编辑');
+            $content->description('订单编辑页面');
 
             $content->body($this->form()->edit($id));
         });
@@ -57,8 +57,8 @@ class OrderController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('订单添加');
+            $content->description('订单添加页面');
 
             $content->body($this->form());
         });
@@ -74,9 +74,12 @@ class OrderController extends Controller
         return Admin::grid(Order::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->column('uid', '用户ID');
+            $grid->column('num', '订单号');
+            $grid->column('status', '订单状态');
+            $grid->column('content', '订单内容');
+            $grid->created_at('创建时间')->sortable();
+            $grid->updated_at('更新时间')->sortable();
         });
     }
 
@@ -90,6 +93,10 @@ class OrderController extends Controller
         return Admin::form(Order::class, function (Form $form) {
 
             $form->display('id', 'ID');
+            $form->text('uid', '用户ID');
+            $form->text('num', '订单号');
+            $form->text('status', '订单状态');
+            $form->text('content', '订单内容');
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
