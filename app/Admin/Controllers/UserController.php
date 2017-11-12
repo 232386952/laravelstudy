@@ -76,12 +76,22 @@ class UserController extends Controller
             $grid->id('ID')->sortable();
             $grid->column('name', '用户名')->style('color:green');
             $grid->column('email','邮箱')->link('mailto:{$value}');
-            $grid->column('password','密码');
-            $grid->column('type','用户类型');
+            $grid->type('用户类型')->select([
+                1 => '普通会员',
+                2 => 'VIP会员',
+                3 => '至尊会员',
+                4 => '内部贵宾',
+            ]);
+
             $grid->column('grade','用户会员等级');
-            $grid->column('avatar','头像');
+
             $grid->column('nickname','昵称');
-            $grid->column('sex','性别');
+
+            $grid->sex('性别')->select([
+                1 => '男性',
+                2 => '女性',
+            ]);
+
             $grid->column('idcard','身份证');
             $grid->column('add','地址');
             $grid->column('phone','电话');
@@ -104,9 +114,17 @@ class UserController extends Controller
             $form->text('name', '用户名');
             $form->email('email', '邮箱');
             $form->password('password','密码');
-            $form->text('type','用户类型');
+            $form->password('password','确认密码');
+            $form->select('type','用户类型')->options([1 => '普通会员', 2 => 'VIP会员', 3 => '至尊会员', 4 => '内部贵宾','val' => '用户类型']);
+
             $form->text('grade','用户会员等级');
-            $form->text('avatar','头像');
+
+            $form->image('avatar', '头像')
+                ->resize(null, 200, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->insert('/storage/images/test1.jpg', 'bottom-right', 10, 10);
+
+
             $form->text('nickname','昵称');
             $form->radio('sex','性别')->values(['0' => '女', '1'=> '男']);
             $form->text('idcard','身份证');
